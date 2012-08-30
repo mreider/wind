@@ -28,7 +28,7 @@ helpers do
 end
 
 # Blog configurations.
-$settings = Setting.from_database
+ $settings = Setting.from_database
 
 # Posts per page
 PAGE_SIZE = 10
