@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
 gem 'sinatra'
-gem 'sqlite3-ruby' 
+gem 'mysql2'
 gem 'sequel'
 gem 'RedCloth'
