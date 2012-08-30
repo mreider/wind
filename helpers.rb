@@ -1,4 +1,5 @@
 require 'RedCloth'
+require 'builder'
 
 def partial(view)
   erb :"_#{view}", :layout => false
