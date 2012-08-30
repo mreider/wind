@@ -1,6 +1,5 @@
-h1. Thanks for testing Cloud Foundry
+h1. Thanks for Testing Cloud Foundry
 
 You are using a forked version of a little blog engine called "Wind":http://github.com/wagnerandrade/wind
 
 !http://i.imgur.com/D2j1P.gif!
-
