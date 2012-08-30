@@ -1,25 +1,19 @@
 require 'sequel'
 require 'mysql2'
+require 'json'
 require 'sequel/extensions/pagination'
 
 require_relative 'lib/atstart.rb'
 require_relative 'lib/datasync.rb'
 require_relative 'lib/extend_string.rb'
 
-configure do
-    services = JSON.parse(ENV['VCAP_SERVICES'])
-    mysql_key = services.keys.select { |svc| svc =~ /mysql/i }.first
-    mysql = services[mysql_key].first['credentials']
-    mysql_conf = {:host => mysql['hostname'], :port => mysql['port'],
-        :username => mysql['user'], :password => mysql['password']}
-    @@client = Mysql2::Client.new mysql_conf
-end
+require 'cfruntime/mysql'
 
 # Plugins.
 Dir['plugins/*.rb'].each { |plugin| require_relative plugin }  
 
 # Database connection.
-DB = Sequel.connect @@client
+DB = Sequel.connect(:adapter=>'mysql2', :host=>'localhost', :database=>'wind', :user=>'root', :password=>'')
 
 # Sequel schema plugin.
 Sequel::Model.plugin :schema
