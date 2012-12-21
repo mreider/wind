@@ -7,7 +7,7 @@ require_relative 'lib/atstart.rb'
 require_relative 'lib/datasync.rb'
 require_relative 'lib/extend_string.rb'
 
-require 'cfruntime/mysql'
+# require 'cfruntime/mysql'
 
 # Plugins.
 Dir['plugins/*.rb'].each { |plugin| require_relative plugin }  
