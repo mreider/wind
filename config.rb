@@ -13,7 +13,15 @@ require_relative 'lib/extend_string.rb'
 Dir['plugins/*.rb'].each { |plugin| require_relative plugin }  
 
 # Database connection.
-DB = Sequel.connect(:adapter=>'mysql2', :host=>'localhost', :database=>'wind', :user=>'root', :password=>'')
+
+require 'uri'
+begin
+  database_uri = URI.parse(ENV["DATABASE_URL"] || 'mysql://root:@localhost/wind')
+rescue URI::InvalidURIError
+  raise "Invalid DATABASE_URL"
+end
+
+DB = Sequel.connect(:adapter=>'mysql2', :host=>database_uri.host, :database=> (database_uri.path || "").split("/")[1] , :user=> database_uri.user, :password=> database_uri.password)
 
 # Sequel schema plugin.
 Sequel::Model.plugin :schema
